@@ -10,11 +10,32 @@ const displayData = logs => {
     const citySection = document.getElementById('citysection');
     citySection.textContent = '';
     const cityDiv = document.createElement('div');
-    cityDiv.innerHTML = `
-    <h1 class= 'font-bold text-white text-5xl '>${logs.name}</h1>
-    <p class ='font-semibold text-white text-2xl mt-10'>Today's temperature at dhaka is</p>
+    let proxy = '';
+    if (logs.main.temp >= 30) {
+        proxy = `
+    <h1 class= 'font-bold text-white text-5xl'>${logs.name}</h1>
+    <p class ='font-semibold text-white text-2xl mt-10'>Today's temperature at dhaka is <i class="fa-solid fa-sun text-3xl"></i></p>
     <h1 class = 'font bold text-white text-4xl'>${logs.main.temp}°C</h1>
     `;
+    }
+    else if (logs.main.temp >= 20 && logs.main.temp < 30) {
+        proxy = `
+        <h1 class= 'font-bold  text-5xl'>${logs.name}</h1>
+        <p class ='font-semibold  text-2xl mt-10'>Today's temperature at dhaka is <i class="fa-solid fa-cloud-sun text-3xl"></i></p>
+        <h1 class = 'font bold  text-4xl'>${logs.main.temp}°C</h1>
+        `;
+    }
+    else {
+        proxy = `
+        <h1 class= 'font-bold  text-5xl'>${logs.name}</h1>
+        <p class ='font-semibold  text-2xl mt-10'>Today's temperature at dhaka is 
+        <i class="fa-solid fa-snowflake text-3xl"></i></p>
+        <h1 class = 'font bold  text-4xl'>${logs.main.temp}°C</h1>
+        `;
+
+    }
+
+    cityDiv.innerHTML = proxy;
     citySection.appendChild(cityDiv)
 
 }
